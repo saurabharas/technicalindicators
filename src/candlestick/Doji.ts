@@ -10,7 +10,9 @@ export default class Doji extends CandlestickFinder {
     logic (data:StockData):boolean {
         let daysOpen = data.open[0];
         let daysClose = data.close[0];
-        return this.approximateEqual(daysOpen, daysClose);
+        let daysHigh = data.high[0];
+        let daysLow = data.low[0];
+        return this.approximateEqualWithExtremes(daysOpen, daysClose,daysHigh,daysLow);
     }
 }
 

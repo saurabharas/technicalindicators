@@ -12,6 +12,13 @@ export default class CandlestickFinder {
         let right = parseFloat((a * 0.001).toPrecision(4)) * 1; 
         return  left <= right 
     }
+
+    approximateEqualWithExtremes(a:number, b:number, low:number, high:number):boolean {
+        const totalDiff = high - low;
+	const diff = Math.abs(b - a);
+	return diff / totalDiff < .1;
+    }
+
     
     logic(data:StockData):boolean {
         throw "this has to be implemented";        

@@ -12,12 +12,19 @@ export default class BearishSpinningTop extends CandlestickFinder {
         let daysClose = data.close[0];
         let daysHigh  = data.high[0];
         let daysLow   = data.low[0];
-
+        /*
         let bodyLength           = Math.abs(daysClose-daysOpen);
         let upperShadowLength    = Math.abs(daysHigh-daysOpen);
         let lowerShadowLength    = Math.abs(daysHigh-daysLow);
         let isBearishSpinningTop = bodyLength < upperShadowLength && 
-                                 bodyLength < lowerShadowLength;
+                               bodyLength < lowerShadowLength;
+        */
+        let bodyLength           = Math.abs(daysClose-daysOpen); // this is good
+        let upperShadowLength    = Math.abs(daysHigh-Math.max(daysOpen,daysClose)); // this should be daysHigh - Math.max(daysOpen, daysClose)
+        let lowerShadowLength    = Math.abs(Math.min(daysOpen,daysClose)-daysLow); // this should be Math.min(daysOpen,days.close) - daysLow
+        let isBearishSpinningTop = bodyLength < upperShadowLength &&
+        bodyLength < lowerShadowLength && daysClose<daysOpen; // this should include check for daysClose < daysOpen
+        
 
         return isBearishSpinningTop;
     }
